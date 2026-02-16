@@ -1,0 +1,16 @@
+# Normalize line endings to LF on commit, checkout as-is
+* text=auto eol=lf
+
+# Explicitly mark binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.wav binary
+*.mp3 binary
+*.ogg binary
+*.onnx binary
+*.woff binary
+*.woff2 binary
+*.zip binary
