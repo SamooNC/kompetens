@@ -1,0 +1,15 @@
+**/.git
+**/__pycache__
+**/.venv
+**/venv
+**/node_modules
+**/dist
+**/.pytest_cache
+**/.coverage
+**/*.pyc
+.env
+.env.local
+docker-compose.override.yml
+docs/
+data/rome/*.zip
+data/opendata/*.csv
