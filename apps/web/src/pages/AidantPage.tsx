@@ -29,9 +29,7 @@ function AidantPage() {
             Guidez le candidat : vous voyez les questions, il répond à voix
             haute.
           </li>
-          <li>
-            Validez chaque étape ensemble avant de passer à la suivante.
-          </li>
+          <li>Validez chaque étape ensemble avant de passer à la suivante.</li>
         </ol>
       </div>
 

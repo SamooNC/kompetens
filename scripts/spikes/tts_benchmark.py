@@ -23,13 +23,11 @@ Usage:
 
 import argparse
 import logging
-import struct
 import sys
 import time
 import wave
 from datetime import datetime
 from pathlib import Path
-from typing import Optional
 
 logging.basicConfig(
     level=logging.INFO,
@@ -66,9 +64,7 @@ TEST_TEXTS: list[dict[str, str]] = [
     {
         "id": "sentence",
         "label": "Confirmation (sentence)",
-        "text": (
-            "Vos competences en conduite d'engins ont bien ete enregistrees."
-        ),
+        "text": ("Vos competences en conduite d'engins ont bien ete enregistrees."),
     },
     {
         "id": "paragraph",
@@ -86,6 +82,7 @@ TEST_TEXTS: list[dict[str, str]] = [
 # ---------------------------------------------------------------------------
 # Benchmark logic
 # ---------------------------------------------------------------------------
+
 
 def get_wav_duration(wav_path: str) -> float:
     """Return WAV file duration in seconds."""
@@ -170,9 +167,7 @@ def run_benchmarks(
                 voice, tx["text"], wav_path, sample_rate
             )
         except Exception as exc:
-            logger.warning(
-                "Streaming synthesis failed (%s), trying non-streaming ...", exc
-            )
+            logger.warning("Streaming synthesis failed (%s), trying non-streaming ...", exc)
             try:
                 synthesis_time, audio_duration = synthesize_to_wav_non_streaming(
                     voice, tx["text"], wav_path, sample_rate
@@ -223,9 +218,10 @@ def run_benchmarks(
 # Report generation
 # ---------------------------------------------------------------------------
 
+
 def generate_report(
     results: list[dict],
-    model_path: Optional[str],
+    model_path: str | None,
     sample_rate: int,
     output_dir: Path,
 ) -> str:
@@ -289,7 +285,9 @@ def generate_report(
     successful = [r for r in results if r["error"] is None]
     if successful:
         rtfs = [r["rtf"] for r in successful if r["rtf"] is not None]
-        synth_times = [r["synthesis_time_s"] for r in successful if r["synthesis_time_s"] is not None]
+        synth_times = [
+            r["synthesis_time_s"] for r in successful if r["synthesis_time_s"] is not None
+        ]
 
         lines.append("## Summary")
         lines.append("")
@@ -298,7 +296,9 @@ def generate_report(
             lines.append(f"- **Worst RTF**: {max(rtfs)}")
             lines.append(f"- **Mean RTF**: {round(sum(rtfs) / len(rtfs), 4)}")
         if synth_times:
-            lines.append(f"- **Mean synthesis time**: {round(sum(synth_times) / len(synth_times), 4)}s")
+            lines.append(
+                f"- **Mean synthesis time**: {round(sum(synth_times) / len(synth_times), 4)}s"
+            )
         lines.append(f"- **Successful**: {len(successful)}/{len(results)}")
         lines.append("")
 
@@ -322,6 +322,7 @@ def generate_report(
 # ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(

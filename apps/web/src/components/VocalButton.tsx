@@ -42,7 +42,9 @@ function VocalButton({ onStart, onStop, className = "" }: VocalButtonProps) {
   }, [isListening, onStop]);
 
   return (
-    <div className={`relative inline-flex items-center justify-center ${className}`}>
+    <div
+      className={`relative inline-flex items-center justify-center ${className}`}
+    >
       {/* Animated pulse ring when listening */}
       {isListening && (
         <span

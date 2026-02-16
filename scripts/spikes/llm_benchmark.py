@@ -24,13 +24,11 @@ Usage:
 """
 
 import argparse
-import json
 import logging
 import sys
 import time
 from datetime import datetime
 from pathlib import Path
-from typing import Optional
 
 logging.basicConfig(
     level=logging.INFO,
@@ -112,6 +110,7 @@ TEST_TRANSCRIPTIONS: list[dict[str, str]] = [
 # Benchmark logic
 # ---------------------------------------------------------------------------
 
+
 def call_llm_streaming(
     client: "openai.OpenAI",
     model: str,
@@ -121,12 +120,12 @@ def call_llm_streaming(
     """Send a prompt to vLLM and measure timing via streaming."""
     user_message = (
         f"Voici la transcription vocale d'un candidat :\n\n"
-        f"\"{transcription}\"\n\n"
+        f'"{transcription}"\n\n'
         f"Extrais les competences au format JSON."
     )
 
     t_start = time.perf_counter()
-    ttft: Optional[float] = None
+    ttft: float | None = None
     full_response = ""
     completion_tokens = 0
 
@@ -183,7 +182,7 @@ def call_llm_non_streaming(
     """Non-streaming fallback for TTFT estimation."""
     user_message = (
         f"Voici la transcription vocale d'un candidat :\n\n"
-        f"\"{transcription}\"\n\n"
+        f'"{transcription}"\n\n'
         f"Extrais les competences au format JSON."
     )
 
@@ -273,6 +272,7 @@ def run_benchmarks(
 # ---------------------------------------------------------------------------
 # Report generation
 # ---------------------------------------------------------------------------
+
 
 def generate_report(
     results: list[dict],
@@ -381,6 +381,7 @@ def generate_report(
 # ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(

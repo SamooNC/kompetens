@@ -33,16 +33,10 @@ function HomePage() {
       </div>
 
       {/* Primary action — large vocal button */}
-      <VocalButton
-        onStart={handleStart}
-        onStop={handleStop}
-        className="my-6"
-      />
+      <VocalButton onStart={handleStart} onStop={handleStop} className="my-6" />
 
       {/* Instruction */}
-      <p className="text-xl text-slate-500">
-        Appuyez sur le micro et parlez
-      </p>
+      <p className="text-xl text-slate-500">Appuyez sur le micro et parlez</p>
     </div>
   );
 }

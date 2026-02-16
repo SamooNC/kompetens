@@ -19,14 +19,13 @@ Usage:
 
 import argparse
 import logging
-import os
+import math
 import struct
 import sys
 import time
 import wave
 from datetime import datetime
 from pathlib import Path
-from typing import Optional
 
 logging.basicConfig(
     level=logging.INFO,
@@ -53,7 +52,6 @@ except ImportError:
 # ---------------------------------------------------------------------------
 # Synthetic audio generation (numpy-free fallback using struct + math)
 # ---------------------------------------------------------------------------
-import math
 
 
 def _generate_sine_wav(path: Path, duration_s: float, sample_rate: int = 16000) -> None:
@@ -149,6 +147,7 @@ def collect_audio_files(audio_dir: str) -> list[dict]:
 # Benchmark logic
 # ---------------------------------------------------------------------------
 
+
 def benchmark_whisper(
     model_size: str,
     device: str,
@@ -183,9 +182,7 @@ def benchmark_whisper(
                 label = af["label"]
                 duration = af["duration_s"]
                 vad_label = "on" if vad else "off"
-                logger.info(
-                    "  Transcribing %s | beam=%d | VAD=%s ...", label, beam, vad_label
-                )
+                logger.info("  Transcribing %s | beam=%d | VAD=%s ...", label, beam, vad_label)
 
                 vad_filter = vad
                 t_start = time.perf_counter()
@@ -231,6 +228,7 @@ def benchmark_whisper(
 # ---------------------------------------------------------------------------
 # Report generation
 # ---------------------------------------------------------------------------
+
 
 def generate_report(
     results: list[dict],
@@ -292,7 +290,9 @@ def generate_report(
         rtfs = [r["rtf"] for r in results]
         lines.append("## Summary")
         lines.append("")
-        lines.append(f"- **Best RTF**: {min(rtfs)} (lower is better; < 1.0 = faster than real-time)")
+        lines.append(
+            f"- **Best RTF**: {min(rtfs)} (lower is better; < 1.0 = faster than real-time)"
+        )
         lines.append(f"- **Worst RTF**: {max(rtfs)}")
         lines.append(f"- **Mean RTF**: {round(sum(rtfs) / len(rtfs), 4)}")
         lines.append(f"- **Total configurations tested**: {len(results)}")
@@ -318,6 +318,7 @@ def generate_report(
 # ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(

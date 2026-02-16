@@ -56,11 +56,7 @@ function InventairePage() {
       </h2>
 
       {/* Vocal button */}
-      <VocalButton
-        onStart={handleStart}
-        onStop={handleStop}
-        className="my-4"
-      />
+      <VocalButton onStart={handleStart} onStop={handleStop} className="my-4" />
 
       {/* Transcript area */}
       <section

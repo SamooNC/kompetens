@@ -115,11 +115,7 @@ function MicIcon() {
         strokeLinejoin="round"
         d="M19 11a7 7 0 01-14 0"
       />
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M12 18v4m-3 0h6"
-      />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v4m-3 0h6" />
     </svg>
   );
 }

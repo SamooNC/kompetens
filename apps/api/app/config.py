@@ -8,9 +8,7 @@ class Settings(BaseSettings):
     """
 
     # --- PostgreSQL ---
-    DATABASE_URL: str = (
-        "postgresql+asyncpg://kompetens:kompetens_dev@localhost:5432/kompetens"
-    )
+    DATABASE_URL: str = "postgresql+asyncpg://kompetens:kompetens_dev@localhost:5432/kompetens"
     DATABASE_URL_SYNC: str = (
         "postgresql+psycopg://kompetens:kompetens_dev@localhost:5432/kompetens"
     )

@@ -21,10 +21,7 @@ class ApiError extends Error {
 async function handleResponse<T>(response: Response): Promise<T> {
   if (!response.ok) {
     const text = await response.text().catch(() => "Unknown error");
-    throw new ApiError(
-      response.status,
-      `API ${response.status}: ${text}`,
-    );
+    throw new ApiError(response.status, `API ${response.status}: ${text}`);
   }
   return response.json() as Promise<T>;
 }
@@ -48,10 +45,7 @@ export async function apiGet<T>(path: string): Promise<T> {
  * @param path - API path, e.g. "/api/inventory/start"
  * @param body - JSON-serialisable payload
  */
-export async function apiPost<T>(
-  path: string,
-  body: unknown,
-): Promise<T> {
+export async function apiPost<T>(path: string, body: unknown): Promise<T> {
   const response = await fetch(`${API_URL}${path}`, {
     method: "POST",
     headers: {

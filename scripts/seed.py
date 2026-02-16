@@ -221,31 +221,27 @@ EXPERIENCES = [
     (
         "celine",
         "Aide sur chantier BTP",
-        "Petits chantiers de construction résidentielle, "
-        "manutention et aide aux engins.",
+        "Petits chantiers de construction résidentielle, manutention et aide aux engins.",
         "1 an",
     ),
     # -- Steeve --
     (
         "steeve",
         "Mineur - opérateur de forage",
-        "Mine de nickel SLN Thio. Forage, extraction "
-        "et maintenance de premier niveau.",
+        "Mine de nickel SLN Thio. Forage, extraction et maintenance de premier niveau.",
         "8 ans",
     ),
     (
         "steeve",
         "Soudeur polyvalent",
-        "Atelier de réparation d'engins miniers, "
-        "soudure MIG sur châssis et bennes.",
+        "Atelier de réparation d'engins miniers, soudure MIG sur châssis et bennes.",
         "2 ans",
     ),
     # -- Marie --
     (
         "marie",
         "Aide ménagère à domicile",
-        "Entretien de plusieurs maisons à Koné, "
-        "ménage, repassage et préparation de repas.",
+        "Entretien de plusieurs maisons à Koné, ménage, repassage et préparation de repas.",
         "5 ans",
     ),
     # -- Jean --
@@ -259,38 +255,33 @@ EXPERIENCES = [
     (
         "jean",
         "Ouvrier agricole saisonnier",
-        "Récolte de squash pour l'export au Japon, "
-        "travail en équipe sur grande exploitation.",
+        "Récolte de squash pour l'export au Japon, travail en équipe sur grande exploitation.",
         "3 saisons",
     ),
     (
         "jean",
         "Conducteur de tracteur",
-        "Labour, semis et transport sur exploitation "
-        "agricole. Entretien courant du matériel.",
+        "Labour, semis et transport sur exploitation agricole. Entretien courant du matériel.",
         "5 ans",
     ),
     # -- Paul --
     (
         "paul",
         "Serveur en restauration rapide",
-        "Fast-food à Nouméa centre, service au comptoir "
-        "et en salle, encaissement, nettoyage.",
+        "Fast-food à Nouméa centre, service au comptoir et en salle, encaissement, nettoyage.",
         "2 ans",
     ),
     (
         "paul",
         "Serveur en restaurant traditionnel",
-        "Restaurant calédonien Baie des Citrons, "
-        "service à l'assiette, carte des vins basique.",
+        "Restaurant calédonien Baie des Citrons, service à l'assiette, carte des vins basique.",
         "1 an",
     ),
     # -- Léa --
     (
         "lea",
         "Vendeuse en prêt-à-porter",
-        "Boutique de vêtements au centre commercial, "
-        "conseil client, mise en rayon, caisse.",
+        "Boutique de vêtements au centre commercial, conseil client, mise en rayon, caisse.",
         "3 ans",
     ),
     # -- Thomas --
@@ -304,16 +295,14 @@ EXPERIENCES = [
     (
         "thomas",
         "Aide charpentier",
-        "Apprentissage sur chantier, découpe et assemblage "
-        "de pièces de bois sous supervision.",
+        "Apprentissage sur chantier, découpe et assemblage de pièces de bois sous supervision.",
         "2 ans",
     ),
     # -- Sophie --
     (
         "sophie",
         "Pêcheuse artisanale",
-        "Pêche côtière à Lifou, filets et lignes. "
-        "Vente directe au marché communal.",
+        "Pêche côtière à Lifou, filets et lignes. Vente directe au marché communal.",
         "7 ans",
     ),
 ]

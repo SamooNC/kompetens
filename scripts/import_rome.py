@@ -159,63 +159,75 @@ def fetch_rome_data(local_path: str | None = None) -> dict[str, list[dict]]:
             definition = fiche.get("definition", "")
 
             if code and libelle:
-                result["metiers"].append({
-                    "code_rome": code,
-                    "libelle": libelle,
-                    "definition": definition,
-                })
+                result["metiers"].append(
+                    {
+                        "code_rome": code,
+                        "libelle": libelle,
+                        "definition": definition,
+                    }
+                )
 
             # Extract competences from fiche
             for comp_block in fiche.get("competencesDeBase", []):
                 comp_code = comp_block.get("code", "")
                 comp_libelle = comp_block.get("libelle", "")
                 if comp_code and comp_libelle:
-                    result["competences"].append({
-                        "code": comp_code,
-                        "libelle": comp_libelle,
-                        "type_competence": "savoir-faire",
-                    })
+                    result["competences"].append(
+                        {
+                            "code": comp_code,
+                            "libelle": comp_libelle,
+                            "type_competence": "savoir-faire",
+                        }
+                    )
 
             for comp_block in fiche.get("competencesSpecifiques", []):
                 comp_code = comp_block.get("code", "")
                 comp_libelle = comp_block.get("libelle", "")
                 if comp_code and comp_libelle:
-                    result["competences"].append({
-                        "code": comp_code,
-                        "libelle": comp_libelle,
-                        "type_competence": "savoir-faire",
-                    })
+                    result["competences"].append(
+                        {
+                            "code": comp_code,
+                            "libelle": comp_libelle,
+                            "type_competence": "savoir-faire",
+                        }
+                    )
 
             for savoir in fiche.get("savoirs", []):
                 s_code = savoir.get("code", "")
                 s_libelle = savoir.get("libelle", "")
                 if s_code and s_libelle:
-                    result["competences"].append({
-                        "code": s_code,
-                        "libelle": s_libelle,
-                        "type_competence": "savoir",
-                    })
+                    result["competences"].append(
+                        {
+                            "code": s_code,
+                            "libelle": s_libelle,
+                            "type_competence": "savoir",
+                        }
+                    )
 
             for savoir_etre in fiche.get("savoirEtre", []):
                 se_code = savoir_etre.get("code", "")
                 se_libelle = savoir_etre.get("libelle", "")
                 if se_code and se_libelle:
-                    result["competences"].append({
-                        "code": se_code,
-                        "libelle": se_libelle,
-                        "type_competence": "savoir-être",
-                    })
+                    result["competences"].append(
+                        {
+                            "code": se_code,
+                            "libelle": se_libelle,
+                            "type_competence": "savoir-être",
+                        }
+                    )
 
             # Extract appellations from fiche
             for appellation in fiche.get("appellations", []):
                 app_code = appellation.get("code", "")
                 app_libelle = appellation.get("libelle", "")
                 if app_code and app_libelle and code:
-                    result["appellations"].append({
-                        "code": app_code,
-                        "libelle": app_libelle,
-                        "code_rome": code,
-                    })
+                    result["appellations"].append(
+                        {
+                            "code": app_code,
+                            "libelle": app_libelle,
+                            "code_rome": code,
+                        }
+                    )
 
         return result
 
@@ -245,11 +257,13 @@ def parse_rome_bulk(data: list[dict]) -> dict[str, list[dict]]:
         definition = item.get("definition", "")
 
         if code and libelle:
-            result["metiers"].append({
-                "code_rome": code,
-                "libelle": libelle,
-                "definition": definition,
-            })
+            result["metiers"].append(
+                {
+                    "code_rome": code,
+                    "libelle": libelle,
+                    "definition": definition,
+                }
+            )
 
         # Nested competences
         for key, comp_type in [
@@ -262,22 +276,26 @@ def parse_rome_bulk(data: list[dict]) -> dict[str, list[dict]]:
                 c_code = comp.get("code", "")
                 c_libelle = comp.get("libelle", "")
                 if c_code and c_libelle:
-                    result["competences"].append({
-                        "code": c_code,
-                        "libelle": c_libelle,
-                        "type_competence": comp_type,
-                    })
+                    result["competences"].append(
+                        {
+                            "code": c_code,
+                            "libelle": c_libelle,
+                            "type_competence": comp_type,
+                        }
+                    )
 
         # Nested appellations
         for appellation in item.get("appellations", []):
             app_code = appellation.get("code", "")
             app_libelle = appellation.get("libelle", "")
             if app_code and app_libelle and code:
-                result["appellations"].append({
-                    "code": app_code,
-                    "libelle": app_libelle,
-                    "code_rome": code,
-                })
+                result["appellations"].append(
+                    {
+                        "code": app_code,
+                        "libelle": app_libelle,
+                        "code_rome": code,
+                    }
+                )
 
     return result
 
@@ -302,7 +320,7 @@ def upsert_rome_data(data: dict[str, list[dict]], dry_run: bool = False) -> None
     competences = list(competences_map.values())
     appellations = list(appellations_map.values())
 
-    print(f"\nData to upsert:")
+    print("\nData to upsert:")
     print(f"  Métiers:       {len(metiers)}")
     print(f"  Compétences:   {len(competences)}")
     print(f"  Appellations:  {len(appellations)}")
@@ -374,7 +392,7 @@ def upsert_rome_data(data: dict[str, list[dict]], dry_run: bool = False) -> None
 
         conn.commit()
 
-    print(f"\n--- Import Summary ---")
+    print("\n--- Import Summary ---")
     print(f"Métiers upserted:       {metiers_count}")
     print(f"Compétences upserted:   {competences_count}")
     print(f"Appellations upserted:  {appellations_count}")
