@@ -1,4 +1,4 @@
-.PHONY: up down dev-api dev-web test test-api test-web lint format db-migrate db-seed import-rome import-opendata
+.PHONY: up down dev-api dev-web test test-api test-web lint format db-migrate db-seed import-rome import-opendata collect-offers build-referentiel audit-anon
 
 # --- Docker ---
 up:
@@ -48,3 +48,14 @@ import-rome:
 
 import-opendata:
 	python scripts/import_opendata.py
+
+# --- Referentiel emergent ---
+collect-offers:
+	python scripts/collect_offers.py
+
+build-referentiel:
+	python scripts/build_referentiel.py
+
+# --- Audit ---
+audit-anon:
+	cd apps/api && python -m pytest tests/test_anonymisation.py -v

@@ -2,7 +2,9 @@
 
 POC (Proof of Concept) d'un outil **voice-first** et **souverain** de mise en relation entre chercheurs d'emploi et recruteurs, concu pour la Nouvelle-Caledonie.
 
-**Mission** : Prouver qu'un outil vocal peut connecter les chercheurs d'emploi (y compris les personnes en situation d'illettrisme) avec les recruteurs, via des intermediaires humains.
+**Vision** : Rendre visible ce qui existe deja — les savoir-faire des gens, dans leurs propres mots — et leur donner le pouvoir de choisir ce qu'ils en font.
+
+**Approche cle** : Le referentiel de competences **emerge des offres d'emploi reelles de NC**, il n'est pas importe d'un cadre national. Le ROME v4 reste en arriere-plan pour l'interoperabilite.
 
 Projet porte par la Commission Data & IA du cluster OPEN NC.
 
@@ -17,8 +19,9 @@ Projet porte par la Commission Data & IA du cluster OPEN NC.
 | STT | Whisper large-v3 (local) |
 | TTS | Piper TTS (local, francais) |
 | Embeddings | sentence-transformers (e5-multilingual) |
+| Clustering | HDBSCAN / agglomeratif (scikit-learn) |
+| Referentiel | Emergent (infere des offres NC) + ROME v4 (arriere-plan) |
 | Badges | Open Badges v3 (JSON-LD, Ed25519) |
-| Taxonomie emploi | ROME v4 (Pole Emploi) |
 
 Toute l'IA tourne **localement** sur serveur NC (NVIDIA H100) — aucun appel cloud.
 
@@ -56,26 +59,41 @@ make format          # ruff format + prettier
 make db-migrate      # Alembic upgrade head
 make db-seed         # Donnees simulees
 
+# Referentiel emergent
+make collect-offers      # Collecter offres emploi NC
+make build-referentiel   # Construire le referentiel emergent
+
 # Import de donnees
-make import-rome     # Taxonomie ROME v4
-make import-opendata # Donnees NC (ISEE, DTEFP)
+make import-rome         # Taxonomie ROME v4 (arriere-plan)
+make import-opendata     # Donnees NC (ISEE, DTEFP)
+
+# Audit
+make audit-anon          # Verifier l'anonymisation
 ```
 
 ## Structure du projet
 
 ```
 kompetens/
+├── VISION.md            # Fondation conceptuelle (lire en premier)
+├── CLAUDE.md            # Constitution technique
+├── BACKLOG.md           # Stories + sprint plan
+├── .claude/skills/      # Instructions specialisees Claude Code
 ├── apps/
 │   ├── web/             # PWA React (Vite + Tailwind + Zustand)
 │   └── api/             # Backend FastAPI
-│       ├── app/         # Code applicatif
+│       ├── app/         # Code applicatif (routers, services, models)
 │       ├── tests/
 │       └── alembic/     # Migrations DB
-├── data/                # ROME, open data, seeds
-├── scripts/             # Scripts d'import et utilitaires
+├── data/
+│   ├── offers/          # Offres NC collectees (brutes)
+│   ├── rome/            # Donnees ROME v4 (arriere-plan)
+│   ├── opendata/        # Donnees NC (ISEE, DTEFP)
+│   └── seeds/           # Donnees simulees POC
+├── scripts/             # Import, collecte, referentiel
+├── docs/                # Architecture, demo, spikes
 ├── docker-compose.yml
-├── Makefile
-└── CLAUDE.md            # Instructions pour Claude Code
+└── Makefile
 ```
 
 ## Personas
@@ -88,10 +106,11 @@ Le POC est concu pour ces utilisateurs types :
 | **Steeve** (38 ans, ex-mines) | Chercheur d'emploi — mode hybride voix/texte |
 | **Didier** (52 ans, employeur BTP) | Recruteur — recherche en langage naturel |
 | **Nadia** (34 ans, bibliothecaire) | Aidante — accompagnement en binome |
+| **Farid** (30 ans, data scientist territorial) | Referentiel emergent — pipeline reproductible |
 
 ## Contribuer
 
-Voir `CLAUDE.md` pour les conventions de code, la structure du projet et les regles de contribution.
+Voir `CLAUDE.md` pour les conventions de code, la structure du projet et les regles de contribution. Lire `VISION.md` pour comprendre le sens du projet.
 
 Les commits suivent le format [Conventional Commits](https://www.conventionalcommits.org/) (`feat:`, `fix:`, `docs:`, etc.).
 
